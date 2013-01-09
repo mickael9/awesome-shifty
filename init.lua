@@ -135,6 +135,7 @@ function shifty.rename(tag, prefix, no_selectall)
                 shifty.set(t)
             end
             shifty.tagkeys(capi.screen[scr])
+            t.selected = true
             t:emit_signal("property::name")
         end
         )
