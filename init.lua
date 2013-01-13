@@ -124,7 +124,7 @@ function shifty.rename(tag, prefix, no_selectall)
         text = text, selectall = not no_selectall},
         tb_widget,
         function (name) if name:len() > 0 then t.name = name; end end,
-        completion,
+        shifty.completion,
         awful.util.getdir("cache") .. "/history_tags",
         nil,
         function ()
@@ -1120,14 +1120,14 @@ capi.tag.add_signal("property::sweep_delay")
 capi.tag.add_signal("property::overload_keys")
 
 -- replace awful's default hook
-capi.client.connect_signal("manage", match)
-capi.client.connect_signal("unmanage", sweep)
+capi.client.connect_signal("manage", shifty.match)
+capi.client.connect_signal("unmanage", shifty.sweep)
 capi.client.disconnect_signal("manage", awful.tag.withcurrent)
 
 for s = 1, capi.screen.count() do
-    awful.tag.attached_connect_signal(s, "property::selected", sweep)
-    awful.tag.attached_connect_signal(s, "tagged", sweep)
-    capi.screen[s]:connect_signal("tag::history::update", tagkeys)
+    awful.tag.attached_connect_signal(s, "property::selected", shifty.sweep)
+    awful.tag.attached_connect_signal(s, "tagged", shifty.sweep)
+    capi.screen[s]:connect_signal("tag::history::update", shifty.tagkeys)
 end
 
 return shifty
