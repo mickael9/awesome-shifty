@@ -351,8 +351,9 @@ function set(t, args)
     end
 
     -- set tag properties and push the new tag table
+    for i, tmp_tag in ipairs(tags) do tmp_tag.activated = false end
     for i, tmp_tag in ipairs(tags) do
-        awful.tag.setproperty(tmp_tag, "index", i)
+        tmp_tag.activated = true
         awful.tag.setscreen(tmp_tag, scr)
     end
     for prop, val in pairs(props) do awful.tag.setproperty(t, prop, val) end
@@ -1111,7 +1112,6 @@ capi.tag.add_signal("property::selected")
 capi.tag.add_signal("property::position")
 capi.tag.add_signal("property::exclusive")
 capi.tag.add_signal("property::persist")
-capi.tag.add_signal("property::index")
 capi.tag.add_signal("property::nopopup")
 capi.tag.add_signal("property::leave_kills")
 capi.tag.add_signal("property::max_clients")
